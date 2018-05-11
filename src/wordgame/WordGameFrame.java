@@ -34,6 +34,7 @@ public class WordGameFrame extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jScrollPane2 = new javax.swing.JScrollPane();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -119,25 +120,27 @@ public class WordGameFrame extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addGroup(jPanel1Layout.createSequentialGroup()
-                            .addGap(46, 46, 46)
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jLabel2)
-                                .addComponent(jLabel3)
-                                .addComponent(jLabel4)
-                                .addComponent(jLabel5)
-                                .addComponent(jLabel6))
-                            .addGap(15, 15, 15)
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(adjectiveInput)
-                                .addComponent(nounInput)
-                                .addComponent(adverbInput)
-                                .addComponent(verbInput)
-                                .addComponent(nameInput)))
-                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                            .addGap(149, 149, 149)
-                            .addComponent(jLabel1)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(46, 46, 46)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel2)
+                                    .addComponent(jLabel3)
+                                    .addComponent(jLabel4)
+                                    .addComponent(jLabel5)
+                                    .addComponent(jLabel6))
+                                .addGap(15, 15, 15)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(adjectiveInput)
+                                    .addComponent(nounInput)
+                                    .addComponent(adverbInput)
+                                    .addComponent(verbInput)
+                                    .addComponent(nameInput)))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                                .addGap(149, 149, 149)
+                                .addComponent(jLabel1)))
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -157,7 +160,7 @@ public class WordGameFrame extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(8, 8, 8)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(nameInput, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -185,7 +188,7 @@ public class WordGameFrame extends javax.swing.JFrame {
                     .addComponent(initButton))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(15, Short.MAX_VALUE))
+                .addContainerGap(13, Short.MAX_VALUE))
         );
 
         jMenu1.setText("File");
@@ -220,10 +223,10 @@ public class WordGameFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_initButtonActionPerformed
 
     private void displayButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_displayButtonActionPerformed
-        outputBox.setText( names.get(rn.nextInt(names.size()))
+        outputBox.setText(names.get(rn.nextInt(names.size()))
       + " " + adverbs.get(rn.nextInt(names.size()))
       + " " + verbs.get(rn.nextInt(names.size()))
-      + " on top of the "  + adjectives.get(rn.nextInt(names.size()))
+      + " on top of the " + adjectives.get(rn.nextInt(names.size()))
       + " " + nouns.get(rn.nextInt(names.size()))
       + " trying to escape the " + adjectives.get(rn.nextInt(names.size()))
       + " " + nouns.get(rn.nextInt(names.size())) + "!");
@@ -239,21 +242,38 @@ public class WordGameFrame extends javax.swing.JFrame {
 
     private void removeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removeButtonActionPerformed
         // Remove the last element from the end of each of the Arrays.
-        names.remove(names.size()-1);
-        verbs.remove(verbs.size()-1);
-        adverbs.remove(adverbs.size()-1);
-        nouns.remove(nouns.size()-1);
-        adjectives.remove(adjectives.size()-1);
-
-        // These trace statements have been added to testing purposes.
-        System.out.println("Names: " + names);
-        System.out.println("Verbs: " + verbs);
-        System.out.println("Adverbs: " + adverbs);
-        System.out.println("Nouns: " + nouns);
-        System.out.println("Adjectives: " + adjectives);
-        System.out.println("\n");
+        removeName();
+        removeVerbs();
+        removeNouns();
+        removeAdverbs();
+        removeAdjectives();
     }//GEN-LAST:event_removeButtonActionPerformed
-
+    /**
+    * Removes a name, noun, verb, adverb and adjective from the ArrayList
+    * pre: The remove button must be pressed
+    * post: The last element in each ArrayList will be removed
+    */
+    
+    private void removeName(){
+        names.remove(names.size()-1);
+    }
+    
+    private void removeVerbs(){
+        verbs.remove(verbs.size()-1);
+    }
+    
+    private void removeNouns(){
+        nouns.remove(nouns.size()-1);
+    }
+    
+    private void removeAdverbs(){
+        adverbs.remove(adverbs.size()-1);
+    }
+    
+    private void removeAdjectives(){
+        adjectives.remove(adjectives.size()-1);
+    }
+    
     private void verbInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_verbInputActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_verbInputActionPerformed
@@ -310,6 +330,7 @@ public class WordGameFrame extends javax.swing.JFrame {
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTextField nameInput;
     private javax.swing.JTextField nounInput;
     private javax.swing.JTextArea outputBox;
